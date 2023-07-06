@@ -64,8 +64,23 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
             setIsLoading(false)
         }
     }
+ 
+    const loginWithEmail = async () => {
+        setIsLoading(true)
 
-
+        try {
+            await signIn('email')
+        } catch (error) {
+            // toast notification
+            toast({
+                title: 'Error',
+                description: 'There was a problem logging in with your email',
+                variant: 'destructive',
+            })
+        } finally {
+            setIsLoading(false)
+        }
+    }
     return (
         <div className={cn('flex flex-col gap-3 justify-center', className)} {...props}>
             <Button 
@@ -98,7 +113,19 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
             Twitter
             </Button>
 
+            <div>
+                <h1>OR</h1>
+            </div>
 
+            <Button 
+            onClick={loginWithEmail} 
+            isLoading={isLoading} 
+            size='sm' 
+            className='w-full'
+            disabled={isLoading}>
+                {isLoading ? null: <Icons.email className='h-4 w-4 mr-2' />}
+            Email
+            </Button>
 
         </div>
     )

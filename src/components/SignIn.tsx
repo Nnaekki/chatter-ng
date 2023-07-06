@@ -6,13 +6,12 @@ import UserAuthForm from "./UserAuthForm"
 
 const SignIn = () => {
   return (
-    <div className="container mx-auto flex w-full flex-xol justify-center space-y06 sm:w-[400px]"> 
+    <div className="container mx-auto pt-10 flex w-full flex-col justify-center space-y-6 sm:w-[400px]"> 
        <div className="flex flex-col space-y-2 text-center">
         <Logo />
-        <h1 className="text-2xl font-semibold tracking-light">Welcome back</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
         <p className="text-sm max-w-xs mx-auto">
-            By continuing, you are setting up a Chatter account and agree to 
-            our User Agreement and Privacy Policy.
+            Sign in to your Chatter account below.
         </p>
         {/* Sign in form */}
         <UserAuthForm />
@@ -21,7 +20,7 @@ const SignIn = () => {
             <Link href='/sign-up'className="hover:text-blue-500 text-sm underline underline-offset-4">Sign Up</Link>
         </p>
         </div> 
-    </div>
+        </div>
   )
 }
 

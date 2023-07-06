@@ -1,5 +1,6 @@
-import { LucideProps, Facebook, Twitter, MessageSquare, User } from 'lucide-react'
+import { LucideProps, Bookmark, Mail, Twitter, MessageSquare, User } from 'lucide-react'
 import {BsFacebook} from "react-icons/bs"
+import {VscGithub} from "react-icons/vsc"
 
 export const Icons = {
   user: User,
@@ -26,4 +27,8 @@ export const Icons = {
   ),
   facebook: BsFacebook,
   twitter: Twitter,  
+  email: Mail,
+  github: VscGithub,
+  commentReply: MessageSquare,
+  bookmark: Bookmark,
 }
