@@ -70,7 +70,8 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
         setIsLoading(true)
 
         try {
-            await signIn('email')
+            await signIn("credentials", { username, password })
+            
         } catch (error) {
             // toast notification
             toast({
