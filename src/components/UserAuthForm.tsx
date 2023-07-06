@@ -6,6 +6,7 @@ import { cn } from '@/lib/utils'
 import { signIn } from 'next-auth/react'
 import { Icons } from './Icons'
 import { useToast } from '@/hooks/use-toast'
+import {useForm} from 'react-hook-form'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
 
@@ -83,6 +84,34 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
     }
     return (
         <div className={cn('flex flex-col gap-3 justify-center', className)} {...props}>
+             <form  onSubmit={(e) => {
+          e.preventDefault();
+          const target = e.target as typeof e.target & {
+            email: { value: string };
+          };
+          const email = target.email.value;
+          signIn("email", { email });
+        }}
+      >
+        <label htmlFor="email" className='sr-only'>Email</label>
+        <input id="email" type="email" className="w-[300px] pl-6 border mx-auto" />
+        <div className='pt-5'>
+        <Button 
+            onClick={loginWithEmail} 
+            isLoading={isLoading} 
+            size='sm' 
+            className='w-full'
+            disabled={isLoading}>
+                {isLoading ? null: <Icons.email className='h-4 w-4 mr-2' />}
+            Email
+            </Button>  
+        </div>
+            </form>
+
+      
+      <div>
+                <h1>OR</h1>
+            </div>
             <Button 
             onClick={loginWithGoogle} 
             isLoading={isLoading} 
@@ -113,19 +142,8 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
             Twitter
             </Button>
 
-            <div>
-                <h1>OR</h1>
-            </div>
 
-            <Button 
-            onClick={loginWithEmail} 
-            isLoading={isLoading} 
-            size='sm' 
-            className='w-full'
-            disabled={isLoading}>
-                {isLoading ? null: <Icons.email className='h-4 w-4 mr-2' />}
-            Email
-            </Button>
+           
 
         </div>
     )

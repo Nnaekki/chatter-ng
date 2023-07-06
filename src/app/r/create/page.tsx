@@ -10,10 +10,6 @@ import { CreateBlogPayload } from "@/lib/validators/blog";
 import { toast } from "@/hooks/use-toast";
 import { useCustomToast } from "@/hooks/use-custom-toast";
 
-export const metadata = {
-  title: 'Chatter',
-  description: 'A Content Publishing Platform to Share and Read Amazing Stories and Articles.',
-}
 
 const Page = () => {
   const [input, setInput] = useState<string>("");
