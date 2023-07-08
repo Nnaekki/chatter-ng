@@ -6,11 +6,11 @@ import UserAuthForm from "./UserAuthForm"
 
 const SignUp = () => {
   return (
-    <div className="container mx-auto pt-10 flex w-full flex-col justify-center space-y-6 sm:w-[400px]"> 
+    <div className="container mx-auto pt-12 flex w-full flex-col justify-center space-y-4 sm:w-[400px]"> 
        <div className="flex flex-col space-y-2 text-center">
         <Logo />
         <h1 className="text-2xl font-semibold tracking-tight">Sign Up</h1>
-        <p className="text-sm max-w-xs mx-auto">
+        <p className="text-sm font-light max-w-xs mx-auto">
             By continuing, you are setting up a Chatter account and agree to 
             our User Agreement and Privacy Policy.
         </p>

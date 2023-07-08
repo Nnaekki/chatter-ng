@@ -46,6 +46,7 @@ const GeneralFeed = async () => {
       <div className='grid grid-cols-1 md:grid-cols-3 gap-y-4 md:gap-x-4 py-6'>  
       <div className="col-span-2">
    {/* feed */}
+   <h1>Top Posts</h1>
    <PostFeed initialPosts={posts} />
 
       </div>

@@ -10,7 +10,7 @@ const Navbar = async () => {
   const session = await getAuthSession ()
 
   return (
-    <div className="fixed max-w-7xl mx-auto top-0 inset-x-0 bg-white flex justify-between p-2 py-5 md:px-20 cursor-pointer h-fit z-[10] shadow-md shadow-gray-600">
+    <div className="fixed max-w-7xl mx-auto top-0 inset-x-0 bg-white flex justify-between p-2 py-5 md:px-20 cursor-pointer z-[10] shadow-md shadow-gray-600">
       <div className="h-full flex items-center space-x-40">
         <Link
           href="/"

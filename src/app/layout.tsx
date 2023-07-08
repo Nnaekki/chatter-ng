@@ -22,12 +22,12 @@ export default function RootLayout({
     className={cn('text-slate-900 antialiased light',
     inter.className
     )}>
-      <body className='pt-12 antialiased'>
+      <body className='antialiased'>
         <Providers>
         {/* @ts-expect-error server component */}
         <Navbar />
         {authModal}
-        <div className="max-w-7xl mx-auto h-full pt-12 bg-white">
+        <div className="max-w-7xl mx-auto bg-white">
         {children}
         </div>
         <Toaster />
