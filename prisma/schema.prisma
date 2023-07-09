@@ -43,7 +43,6 @@ model User {
   name          String?
   // bio           String
   email         String?   @unique
-  password String
   emailVerified DateTime?
   createdBlog   Blog[]    @relation("CreatedBy")
 
@@ -58,6 +57,14 @@ model User {
   Vote         Vote[]
   Subscription Subscription[]
   Bookmark     Bookmark[]
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
 
 model Blog {

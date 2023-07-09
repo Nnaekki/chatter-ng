@@ -4,7 +4,7 @@ import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
 import TwitterProvider from "next-auth/providers/twitter";
-import CredentialsProvider from "next-auth/providers/credentials";
+import EmailProvider from "next-auth/providers/email";
 import { nanoid } from "nanoid";
 
 export const authOptions: NextAuthOptions = {
@@ -29,32 +29,18 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.TWITTER_CLIENT_SECRET!,
       version: "2.0",
     }),
-    CredentialsProvider({
-      type: "credentials",
-      credentials: {
-        email: {
-          label: "Email",
-          type: "email",
-          placeholder: "example@example.com",
-        },
-        password: { label: "Password", type: "password" },
-      },
-      async authorize(credentials, req) {
-        if (!credentials || !credentials.email || !credentials.password)
-          return null;
-
-        const dbUser = await db.user.findUnique({
-          where: {
-            email: credentials.email,
-          },
-        });
-
-        if (dbUser && dbUser.password === credentials.password) {
-          return dbUser;
+    EmailProvider({
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD
         }
-        return null;
       },
+      from: process.env.EMAIL_FROM
     }),
+     
   ],
   callbacks: {
     async session({ token, session }) {

@@ -8,10 +8,9 @@ import { Icons } from './Icons'
 import { useToast } from '@/hooks/use-toast'
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
-csrfToken?: string;
 }
 
-const UserAuthForm: FC<UserAuthFormProps> = ({ csrfToken, className, ...props }) => {
+const UserAuthForm: FC<UserAuthFormProps> = ({ className, ...props }) => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const {toast} = useToast()
 
@@ -65,18 +64,11 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ csrfToken, className, ...props })
         }
     }
  
-    const handleSubmit = async (e: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined }) => {
-        e.preventDefault();
-        const data = new FormData(e.currentTarget);
-
+    const loginWithEmail = async () => {
         setIsLoading(true)
 
         try {
-            await signIn("credentials", {
-                email: data.get('email'),
-                password: data.get('password'),
-                redirect: false,
-            }) 
+            await signIn('email')
             
         } catch (error) {
             // toast notification
@@ -93,29 +85,15 @@ const UserAuthForm: FC<UserAuthFormProps> = ({ csrfToken, className, ...props })
 
     return (
         <div className={cn('flex flex-col gap-3 justify-center', className)} {...props}>
-             <form onSubmit={handleSubmit} >
-
-        <label htmlFor="email" className='sr-only'>
-          Email
-        </label>
-        <input id="email" type="email" className="w-[300px] pl-6 mb-4 border mx-auto" required placeholder='Email' />
-
-        <label htmlFor="password" className='sr-only'>
-          Password
-        </label>
-        <input id="password" type="password" className="w-[300px] pl-6 border mx-auto" required placeholder='Password'/>
-        <div className="pt-5">
-          <Button isLoading={isLoading} size="sm" className="w-full" disabled={isLoading}>
+           
+          <Button 
+         onClick={loginWithEmail} 
+          isLoading={isLoading} 
+          size="sm" className="w-full" 
+          disabled={isLoading}>
             {isLoading ? null : <Icons.email className="h-4 w-4 mr-2" />}
             Email
             </Button>  
-        </div>
-            </form>
-
-      
-      <div>
-                <h1>OR</h1>
-            </div>
             <Button 
             onClick={loginWithGoogle} 
             isLoading={isLoading} 
